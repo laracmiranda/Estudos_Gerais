@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Produto</title>
+</head>
+<body>
+  <h1>Cadastro de Produto com Imagem</h1>
+  <form id="produtoForm">
+    <input type="text" name="nome" placeholder="Nome do produto" required><br>
+    <input type="text" name="descricao" placeholder="Descrição"><br>
+    <input type="number" name="preco" placeholder="Preço" required step="0.01"><br>
+    <input type="file" name="image" accept="image/*" required><br>
+    <button type="submit">Cadastrar Produto</button>
+  </form>
+
+  <h2>Produtos Cadastrados</h2>
+  <div id="produtos"></div>
+
+  <script>
+    const form = document.getElementById('produtoForm');
+    const produtosDiv = document.getElementById('produtos');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const res = await fetch('http://localhost:3000/api/produtos/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      form.reset();
+      carregarProdutos();
+    });
+
+    async function carregarProdutos() {
+      const res = await fetch('http://localhost:3000/api/produtos');
+      const produtos = await res.json();
+      produtosDiv.innerHTML = '';
+
+      produtos.forEach(p => {
+        const item = document.createElement('div');
+        item.innerHTML = `
+          <h3>${p.nome}</h3>
+          <img src="${p.imageUrl}" alt="${p.nome}" width="200" />
+          <p>${p.descricao || ''}</p>
+          <p>R$ ${p.preco.toFixed(2)}</p>
+        `;
+        produtosDiv.appendChild(item);
+      });
+    }
+
+    // Carrega ao abrir
+    carregarProdutos();
+  </script>
+</body>
+</html>
