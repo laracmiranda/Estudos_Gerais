@@ -23,4 +23,4 @@ Este repositório serve como um **repositório central de aprendizado**, onde co
 
 --- 
 
-Feito com 💜 [Lara Corsini]
+Feito com 💜 por **Lara Corsini**
