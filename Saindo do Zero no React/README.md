@@ -1,49 +1,99 @@
-Vídeo aula [**Como sair do Zero no React em Apenas UMA AULA**](https://www.youtube.com/watch?v=6hiqVVCsA_I) do Canal Hashtag Programação
+# 🧾 Lista de Mercado - React + TailwindCSS
 
-Primeiro instalamos o Vite e configuramos ele para usar React
+![Capa do Projeto](./src/assets/image.png)
+
+> Interface leve, colorida e intuitiva para gerenciar sua lista de compras! 🛒
+
+---
+
+## 📺 Aula-base do projeto
+
+[**Como sair do Zero no React em Apenas UMA AULA**](https://www.youtube.com/watch?v=6hiqVVCsA_I)
+🎓 Canal: **Hashtag Programação**
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge\&logo=react\&logoColor=61DAFB)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge\&logo=tailwind-css\&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge\&logo=vite\&logoColor=white)
+
+---
+
+### ⚙️ Instalação e uso
+
+```bash
+# 1. Criar projeto com Vite
 npm create vite@latest
 
-Depois é preciso rodar os comandos:
-npm install -> Para instalar as dependências do arquivo package.json
-npm run dev -> Vai rodar o servidor local
+# 2. Instalar dependências
+npm install
 
-Conceitos
-Componente em React: Entidade que representa algo na página. Funcionam de forma independente
-Tag vazia em React se chama "Fragment". Utilizada porque o return só retorna 1 elemento, então ela conta como um elemento só no return, porém dentro dela contém diversos outros elementos.
-StrictMode: Usado apenas na forma de desenvolvimento para testar o aplicativo, fazendo com que o componente renderize duas vezes
+# 3. Rodar o servidor
+npm run dev
+```
 
-Extensão para VSCODE 
-ES7 + React/Reduc
-Atalho: rafce -> Cria um componente padrão dentro de um novo arquivo
-react arrow function component exrpot
+---
 
-Importante sempre importar os pacotes e componentes que está utilizando antes
-Prop: Parâmetros que passamos para componentes
+## 📚 Conceitos importantes aprendidos
 
-Erro
-Each child in a list should have a unique "key" prop.
-Cada filho em uma lista no react precisa ter uma chave única
-Por que? É a forma do react identificar e conseguir implementar a lógica dos componentes, para saber quais devem ser renderizados, etc.
+### 🧩 Conceitos de React
 
-Hooks
-useState: Cria uma variável de estado
-Ele não retorna uma informação e sim um array [A variável que armazena a informação, uma função para alterar essa variável]
+* **Componente:** Entidade que representa algo na interface. Funciona de forma independente e reutilizável.
+* **Fragment (`<> </>`):** Tag vazia que envolve múltiplos elementos no `return`. Necessário pois o `return` do componente só aceita um elemento pai.
+* **StrictMode:** Utilizado apenas em desenvolvimento. Faz o React renderizar duas vezes os componentes para detectar problemas.
+* **Props:** São parâmetros passados para componentes — ajudam a torná-los reutilizáveis.
+* **Erro comum:**
 
-useRef: Cria uma referência dentro de uma variável
+  ```
+  Each child in a list should have a unique "key" prop.
+  ```
 
-Tailwind
+  Isso acontece porque cada item de uma lista precisa de uma `key` única para que o React consiga identificar e atualizar os elementos corretamente.
 
-Instalando o tailwind com Vite
-npm install tailwindcss @tailwindcss/vite
+---
 
-Extensão do VSCode
-Tailwind CSS IntelliSense
+### 🪝 Hooks
 
-Dependência de desenvolvimento para organizar o código
-Tailwind com prettier
+* **`useState`**
+
+  ```js
+  const [valor, setValor] = useState(0);
+  ```
+
+  Cria um estado local. Retorna um array com a variável e uma função para alterá-la.
+
+* **`useRef`**
+
+  ```js
+  const inputRef = useRef(null);
+  ```
+
+  Cria uma referência para acessar diretamente elementos da DOM ou armazenar valores persistentes.
+
+---
+
+### 🛠 Ferramentas e Extensões Recomendadas
+
+* **ES7+ React Snippets** (atalho: `rafce`)
+* **Tailwind CSS IntelliSense**
+* **Prettier + Tailwind Plugin**
+
+```bash
 npm install -D prettier prettier-plugin-tailwindcss
+```
 
-Adiciona esse plugin dentro do package.json
+Configuração no `package.json`:
+
+```json
 "prettier": {
   "plugins": ["prettier-plugin-tailwindcss"]
-},
+}
+```
+
+---
+
+### 💡 Resultado
+
+A aplicação é uma **Lista de Mercado interativa** onde o usuário pode adicionar e excluir itens dinamicamente com uma experiência agradável e fluída!
