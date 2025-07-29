@@ -9,7 +9,7 @@
 ## 📺 Aula-base do projeto
 
 [**Como sair do Zero no React em Apenas UMA AULA**](https://www.youtube.com/watch?v=6hiqVVCsA_I)
-🎓 Canal: **Hashtag Programação**
+Canal: **Hashtag Programação**
 
 ---
 
