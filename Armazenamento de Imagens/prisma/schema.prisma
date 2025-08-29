@@ -7,11 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model usuarios {
-  id_user Int     @id @default(autoincrement())
-  imagem  String? @db.VarChar
-}
-
 model Produto {
   id        Int     @id @default(autoincrement())
   nome      String
