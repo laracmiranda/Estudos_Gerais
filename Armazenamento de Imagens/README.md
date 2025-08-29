@@ -34,11 +34,11 @@ Este projeto é um exemplo completo de como criar um sistema de cadastro de prod
 │   ├── config/
 │   │   └── cloudinary.js  # Configuração do Cloudinary
 │   ├── middlewares/
-│   │   └── upload.js  # Configuração do Multer
+│   │   └── upload.js      # Configuração do Multer
 │   ├── controllers/
 │   │   └── ProductController.js 
 │   ├── routes/
-│   │   └── index.js # Rotas de produto
+│   │   └── index.js       # Rotas de produto
 │   └── server.js          # Entrada do servidor Express
 ```
 ---
@@ -85,16 +85,16 @@ npx prisma generate
 
 O que cada parte do código faz?
 
-### `src/server.js`
+### 🔹 `src/server.js`
 - Configura o Express
 - Habilita `cors()` para permitir requisições do front
 - Serve o HTML da pasta `public`
 - Usa as rotas de produto (`/api/produtos`)
 
-### `src/config/cloudinary.js`
+### 🔹 `src/config/cloudinary.js`
 - Configura o Cloudinary com as credenciais do `.env`
 
-### `src/controllers/ProductController.js`
+### 🔹 `src/controllers/ProductController.js`
 - Recebe os dados do frontend
 ```js
 const { nome, descricao, preco } = req.body;
@@ -131,7 +131,7 @@ const newProduct = await prismaClient.produto.create({
 });
 ```
 
-### `src/utils/upload.js`
+### 🔹 `src/utils/upload.js`
 - Usado para processar uploads de imagem via `multipart/form-data`
 
 ---
@@ -139,12 +139,8 @@ const newProduct = await prismaClient.produto.create({
 ## 🌐 Front-end HTML (`public/index.html`)
 
 Frontend simples apenas para testes!
-
-### `form`
 - Permite cadastrar nome, descrição, preço e imagem
 - Envia via `fetch` para `/api/produtos/`
-
-### JS
 - Após envio, limpa o formulário e recarrega os produtos
 - Carrega automaticamente os produtos existentes via `GET /api/produtos`
 - Insere as imagens usando `src=imageUrl`
