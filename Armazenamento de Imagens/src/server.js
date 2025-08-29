@@ -1,19 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+import express from "express";
+import cors from "cors";
+import { router } from "./routes/index.js"
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const app = express();
-const produtoRoutes = require('./routes/produtoRoutes');
-const path = require('path');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+app.use(router);
 app.use(cors());
 
-app.use('/api/produtos', produtoRoutes);
-app.use(express.static(path.join(__dirname, '../public')));
+app.use("/api", router);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+    console.log(`Servidor rodando na porta http://localhost:${PORT}`);
+})
+

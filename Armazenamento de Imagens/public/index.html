@@ -102,7 +102,7 @@
       const formData = new FormData(form);
 
       try {
-        const res = await fetch('http://localhost:3000/api/produtos/upload', {
+        const res = await fetch('http://localhost:3000/api/produtos', {
           method: 'POST',
           body: formData,
         });
@@ -119,7 +119,7 @@
 
     async function carregarProdutos() {
       try {
-        const res = await fetch('http://localhost:3000/api/produtos');
+        const res = await fetch('http://localhost:3000/api/');
         const produtos = await res.json();
         produtosDiv.innerHTML = '';
 
