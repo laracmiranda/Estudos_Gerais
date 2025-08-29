@@ -1,9 +1,9 @@
-# 📦 Armazenamento de Imagens
+# 📦 Armazenamento de Imagens em Banco
 
 Este projeto é um exemplo completo de como criar um sistema de cadastro de produtos com upload de imagem, utilizando:
 
 - **Node.js + Express** para o back-end
-- **Cloudinary** para armazenar imagens na nuvem
+- **Cloudinary + multer** para armazenar imagens na nuvem
 - **Neon** para criar o banco de dados na nuvem
 - **Prisma ORM + PostgreSQL** para persistência de dados
 - **HTML + JS** simples no front-end para testes
@@ -28,28 +28,19 @@ Este projeto é um exemplo completo de como criar um sistema de cadastro de prod
 │   └── index.html         # Front-end HTML básico
 ├── prisma/
 │   └── schema.prisma      # Schema do banco com Prisma
+├── database/
+│   └── PrismaClient.js    # Instância do Prisma
 ├── src/
 │   ├── config/
 │   │   └── cloudinary.js  # Configuração do Cloudinary
+│   ├── middlewares/
+│   │   └── upload.js  # Configuração do Multer
+│   ├── controllers/
+│   │   └── ProductController.js 
 │   ├── routes/
-│   │   └── produtoRoutes.js # Rotas de produto
+│   │   └── index.js # Rotas de produto
 │   └── server.js          # Entrada do servidor Express
 ```
-
----
-
-## 📦 Dependências
-
-Instale com:
-```bash
-npm install express dotenv cors multer cloudinary @prisma/client
-```
-
-Dev:
-```bash
-npm install -D nodemon prisma
-```
-
 ---
 
 ## ⚙️ Configuração
@@ -92,6 +83,8 @@ npx prisma generate
 
 ## 🔌 Back-end (Explicações)
 
+O que cada parte do código faz?
+
 ### `src/server.js`
 - Configura o Express
 - Habilita `cors()` para permitir requisições do front
@@ -101,20 +94,55 @@ npx prisma generate
 ### `src/config/cloudinary.js`
 - Configura o Cloudinary com as credenciais do `.env`
 
-### `src/routes/produtoRoutes.js`
-- POST `/upload`: recebe imagem, envia ao Cloudinary, salva URL no banco
-- GET `/`: lista todos os produtos cadastrados
+### `src/controllers/ProductController.js`
+- Recebe os dados do frontend
+```js
+const { nome, descricao, preco } = req.body;
+```
 
-### `multer`
+- Valida se a imagem foi enviada
+```js
+if (!req.file || !req.file.buffer) {
+    return res.status(400).json({ erro: 'Arquivo não encontrado', mensagem: 'Nenhuma imagem foi enviada' });
+}
+```
+
+- Faz o upload da imagem para o Cloudinary
+```js
+const result = await new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream({ folder: "produtos" }, (error, result) => {
+        if (error) return reject(error);
+        resolve(result);
+    });
+    streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+});
+```
+
+- Salva o produto no banco com Prisma
+```js
+const image = result.secure_url;
+const newProduct = await prismaClient.produto.create({
+    data: {
+        nome,
+        descricao,
+        preco: parseFloat(preco),
+        imageUrl: image,
+    },
+});
+```
+
+### `src/utils/upload.js`
 - Usado para processar uploads de imagem via `multipart/form-data`
 
 ---
 
 ## 🌐 Front-end HTML (`public/index.html`)
 
+Frontend simples apenas para testes!
+
 ### `form`
 - Permite cadastrar nome, descrição, preço e imagem
-- Envia via `fetch` para `/api/produtos/upload`
+- Envia via `fetch` para `/api/produtos/`
 
 ### JS
 - Após envio, limpa o formulário e recarrega os produtos
@@ -131,10 +159,6 @@ npx prisma generate
 npx prisma migrate dev --name init
 ```
 3. Inicie o servidor:
-```bash
-npx nodemon src/server.js
-```
-ou 
 ```bash
 npm start
 ```
