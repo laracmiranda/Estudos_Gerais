@@ -3,14 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <title>Cadastro de Produto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #a951be;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #8c439e;
+    }
+
+    #produtos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #produtos div {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 220px;
+      text-align: center;
+    }
+
+    #produtos img {
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
   <h1>Cadastro de Produto com Imagem</h1>
   <form id="produtoForm">
-    <input type="text" name="nome" placeholder="Nome do produto" required><br>
-    <input type="text" name="descricao" placeholder="Descrição"><br>
-    <input type="number" name="preco" placeholder="Preço" required step="0.01"><br>
-    <input type="file" name="image" accept="image/*" required><br>
+    <input type="text" name="nome" placeholder="Nome do produto" required>
+    <input type="text" name="descricao" placeholder="Descrição">
+    <input type="number" name="preco" placeholder="Preço" required step="0.01">
+    <input type="file" name="image" accept="image/*" required>
     <button type="submit">Cadastrar Produto</button>
   </form>
 
@@ -26,32 +101,42 @@
 
       const formData = new FormData(form);
 
-      const res = await fetch('http://localhost:3000/api/produtos/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      try {
+        const res = await fetch('http://localhost:3000/api/produtos/upload', {
+          method: 'POST',
+          body: formData,
+        });
 
-      const data = await res.json();
-      alert(data.message);
-      form.reset();
-      carregarProdutos();
+        const data = await res.json();
+        alert(data.message);
+        form.reset();
+        carregarProdutos();
+      } catch (err) {
+        alert('Erro ao cadastrar produto.');
+        console.error(err);
+      }
     });
 
     async function carregarProdutos() {
-      const res = await fetch('http://localhost:3000/api/produtos');
-      const produtos = await res.json();
-      produtosDiv.innerHTML = '';
+      try {
+        const res = await fetch('http://localhost:3000/api/produtos');
+        const produtos = await res.json();
+        produtosDiv.innerHTML = '';
 
-      produtos.forEach(p => {
-        const item = document.createElement('div');
-        item.innerHTML = `
-          <h3>${p.nome}</h3>
-          <img src="${p.imageUrl}" alt="${p.nome}" width="200" />
-          <p>${p.descricao || ''}</p>
-          <p>R$ ${p.preco.toFixed(2)}</p>
-        `;
-        produtosDiv.appendChild(item);
-      });
+        produtos.forEach(p => {
+          const item = document.createElement('div');
+          item.innerHTML = `
+            <h3>${p.nome}</h3>
+            <img src="${p.imageUrl}" alt="${p.nome}" />
+            <p>${p.descricao || ''}</p>
+            <p>R$ ${p.preco.toFixed(2)}</p>
+          `;
+          produtosDiv.appendChild(item);
+        });
+      } catch (err) {
+        produtosDiv.innerHTML = '<p>Erro ao carregar produtos.</p>';
+        console.error(err);
+      }
     }
 
     // Carrega ao abrir
