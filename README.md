@@ -4,6 +4,14 @@ Repositório criado para organizar e compartilhar meus **estudos**, **anotaçõe
 
 ---
 
+## 📚 Sumário
+
+- [**Dicas de Git e Github**](./Dicas%20de%20Git%20e%20Github/Git-Dicas/)
+- [**Como armazenar imagens em banco**](./Armazenamento%20de%20Imagens/)
+- [**Saindo do Zero no React**](./Saindo%20do%20Zero%20no%20React/)
+
+---
+
 ## ✨ Objetivo
 
 Este repositório serve como um **repositório central de aprendizado**, onde concentro:
@@ -14,14 +22,6 @@ Este repositório serve como um **repositório central de aprendizado**, onde co
 - 📂 Materiais de cursos, artigos e tutoriais
 - 🧪 Testes com novas tecnologias
 
---- 
-
-## 📚 Sumário
-
-- [**Dicas de Git e Github**](./Dicas%20de%20Git%20e%20Github/Git-Dicas/)
-- [**Como armazenar imagens em banco**](./Armazenamento%20de%20Imagens/)
-- [**Saindo do Zero no React**](./Saindo%20do%20Zero%20no%20React/)
-
---- 
+---  
 
 Feito com 💜 por **Lara Corsini**
