@@ -8,10 +8,6 @@ Este projeto é um exemplo completo de como criar um sistema de cadastro de prod
 - **Prisma ORM + PostgreSQL** para persistência de dados
 - **HTML + JS** simples no front-end para testes
 
-<p align="center">
-  <img src="/Armazenamento de Imagens/public/assets/Upload_Imagens.mp4" width="1000px" height="500px" alt="Demonstração" />
-</p>
-
 ---
 
 ## 🚀 Funcionalidades
