@@ -64,7 +64,7 @@ export class AuthController {
                 `
                 <h2> Olá, ${user.name} </h2>
                 <p> Você solicitou redefinição de senha. Clique no link abaixo para redefinir: </p>
-                <a href="http://localhost:${PORT}/ai/auth/reset-password/${resetToken}">
+                <a href="http://localhost:${PORT}/api/auth/reset-password/${resetToken}">
                    👉 Redefinir minha senha
                 </a>
 

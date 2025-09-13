@@ -11,7 +11,7 @@ export const transpoter = nodemailer.createTransport({
 export async function sendMail(to, subject, html){
     try {
         await transpoter.sendMail({
-            from: `"Suporte" <${process.send.EMAIL_USER}>`,
+            from: `"Suporte" <${process.env.EMAIL_USER}>`,
             to, 
             subject,
             html,
