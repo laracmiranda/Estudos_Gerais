@@ -9,6 +9,7 @@ Repositório criado para organizar e compartilhar meus **estudos**, **anotaçõe
 - [**Dicas de Git e Github**](./Dicas%20de%20Git%20e%20Github/)
 - [**Como armazenar imagens em banco**](./Armazenamento%20de%20Imagens/)
 - [**Saindo do Zero no React**](./Saindo%20do%20Zero%20no%20React/)
+- [**Redefinindo senha com nodemailer**](./Redefinição%20de%20Senha%20com%20nodemailer/)
 
 ---
 
