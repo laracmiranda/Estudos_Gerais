@@ -10,6 +10,7 @@ Repositório criado para organizar e compartilhar meus **estudos**, **anotaçõe
 - [**Como armazenar imagens em banco**](./Armazenamento%20de%20Imagens/)
 - [**Saindo do Zero no React**](./Saindo%20do%20Zero%20no%20React/)
 - [**Redefinindo senha com nodemailer**](./Redefinição%20de%20Senha%20com%20nodemailer/)
+- [**Adicionando pacman no github**](./Adicionando%20pacman%20no%20github/)
 
 ---
 
